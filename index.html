@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hi!</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+<rect width='100' height='100' fill='white'/>
+</svg>">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial Narrow, sans-serif;
+    overflow: hidden;
+}
+
+/* ===== ПК версия ===== */
+
+.desktop {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+.column {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.left {
+    padding: 10px;
+    flex: 0 0 clamp(160px, 10vw, 240px);
+    border-right: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    fill: white;
+}
+
+.middle {
+    padding: 10px;
+    flex: 0 0 clamp(220px, 18vw, 380px);
+    padding-right: 10px;
+    width: 18%;
+    border-right: 1px solid black;
+}
+
+.right {
+    width: 72%;
+}
+
+/* ===== ЛЕВАЯ КОЛОНКА ===== */
+
+.name {
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+
+.profession {
+    margin-top: 3px;
+    color: #A0A0A0;
+    font-size: 16px;
+}
+
+.resume {
+    margin-top: 30px;
+    font-size: 16px;
+    width: 60px;
+    font-weight: bold;
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+.contacts {
+    margin-top: auto;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.contact-label {
+    color: #A0A0A0;
+}
+
+.phone {
+    display: block;
+    margin-top: 3px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.telegram-label {
+    margin-top: 15px;
+    display: block;
+}
+
+.telegram {
+    display: block;
+    margin-top: 3px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+/* эффект выезжающей плашки */
+.hover-highlight {
+    display: inline;
+    padding: 2px 0px;
+    line-height: 1.25;
+
+    background-image: linear-gradient(black, black);
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    background-position: left center;
+
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+
+    transition:
+        color 0.15s ease,
+        background-size 0.35s cubic-bezier(.65,0,.35,1);
+}
+
+/* наведение */
+.hover-highlight:hover {
+    color: white;
+    background-size: 100% 100%;
+}
+
+/* ===== СРЕДНЯЯ КОЛОНКА ===== */
+
+.project-list {
+    margin-top: 5px;
+}
+
+.project {
+    margin-bottom: 25px;
+    cursor: pointer;
+}
+
+.project-meta {
+    margin-left: 3px;
+    color: #A0A0A0;
+    font-size: 16px;
+}
+
+.project-title {
+    margin-top: 3px;
+    font-size: 20px;
+    color: black;
+
+    display: inline;
+    line-height: 1.25;
+
+    padding: 2px 4px;
+
+    background-image: linear-gradient(black, black);
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    background-position: left center;
+
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+
+    transition:
+        color 0.2s ease,
+        background-size 0.2s ease;
+}
+
+
+
+.project:hover .project-title {
+    color: white;
+    background-size: 100% 100%;
+    transition:
+    color 0.2s ease,
+    background-size 0.35s cubic-bezier(.65,0,.35,1);
+}
+
+
+
+/* ===== Мобильная заглушка ===== */
+
+.mobile-message {
+    display: none;
+    height: 100vh;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    font-size: 18px;
+}
+
+@media (max-width: 900px) {
+    .desktop {
+        display: none;
+    }
+    .mobile-message {
+        display: flex;
+    }
+}
+
+/* ===== АНИМАЦИЯ ТРЕТЬЕЙ КОЛОНКИ ===== */
+
+.right {
+    position: relative;
+    overflow-y: auto;
+    padding: 2px;
+}
+
+.content-wrapper {
+    animation: slideIn 0.6s ease forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-60px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+/* ===== ОБЩИЙ БОЛЬШОЙ ЗАГОЛОВОК ===== */
+
+.page-title {
+    position: absolute;
+    font-weight: bold;
+    top: -30px;
+    right: -3px;
+    font-size: 140px;
+    color: white;
+    -webkit-text-stroke: 1px black;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* ===== СТРАНИЦА ОБО МНЕ ===== */
+
+.about-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+/* изображение 1 */
+.about-img1 {
+    position: absolute;
+    width: 27.5%;
+    min-width: 200px;
+    left: 28%;
+    top: 28%;
+    transform: translateX(-50%);
+}
+
+/* текст */
+.about-text {
+    position: absolute;
+    width: 30%;
+    min-width: 250px;
+    font-size: clamp(16px, 1.4vw, 20px);
+    color: black;
+    left: calc(42.5% + 7px);
+    top: calc(25% - 7px);
+}
+
+/* изображение 2 */
+.about-img2 {
+    position: absolute;
+    width: 15%;
+    min-width: 125px;
+    left: 80%;
+    bottom: 15%;
+    transform: translateX(-50%);
+}
+
+/* ===== МАТЕРИЯ ===== */
+.materia-container{
+    position: relative;
+    width: 100%;
+}
+
+/* сцена масштабируется только от ширины */
+.materia-scene{
+    position: relative;
+    width: 100%;
+    max-width: 1920px;
+    height: calc(100vw * 0.9); 
+}
+
+.materia-text {
+    position: absolute;
+    width: 45%;
+    min-width: 20px;
+    font-size: clamp(16px, 1.4vw, 20px);
+    color: black;
+    left: 27.5%;
+    top: 33.25%;
+}
+
+.materia-img1{
+    position: absolute;
+    width: 45%;
+    left: 50%;
+    top: 15%;
+    transform: translateX(-50%);
+}
+
+.materia-img2{
+    position: absolute;
+    width: 27.5%;
+    left: 13.75%;
+    top: 40%;
+    transform: translateX(-50%);
+}
+
+.materia-img3{
+    position: absolute;
+    width: 55%;
+    right: -27.5%;
+    top: 50.75%;
+    transform: translateX(-50%);
+}
+
+.materia-img4{
+    position: absolute;
+    width: 27.5%;
+    right: 13.75%;
+    top: 83.75%;
+    transform: translateX(-50%);
+}
+
+/* ===== MARRACE ===== */
+
+.marrace-container{
+    position: relative;
+    width: 100%;
+}
+
+/* сцена масштабируется только от ширины */
+.marrace-scene{
+    position: relative;
+    width: 100%;
+    max-width: 1920px;
+    height: calc(100vw * 0.9); 
+}
+
+
+.marrace-img1{
+    position: absolute;
+    width: 27.5%;
+    min-width: 20px;
+    left: 13.75%;
+    top: 15%;
+    transform: translateX(-50%);
+}
+
+.marrace-img2{
+    position: absolute;
+    width: 15%;
+    min-width: 20px;
+    left: 35.25%;
+    top: 15%;
+    transform: translateX(-50%);
+}
+
+.marrace-img3{
+    position: absolute;
+    width: 70%;
+    min-width: 20px;
+    right: -35%;
+    top: 45%;
+    transform: translateX(-50%);
+}
+
+.marrace-img4{
+    position: absolute;
+    width: 40%;
+    min-width: 20px;
+    left: 20%;
+    top: 85.275%;
+    transform: translateX(-50%);
+}
+
+.marrace-img5{
+    position: absolute;
+    width: 15%;
+    min-width: 20px;
+    left: 48%;
+    top: 85.275%;
+    transform: translateX(-50%);
+}
+
+.marrace-img6{
+    position: absolute;
+    width: 15%;
+    min-width: 20px;
+    left: 7.5%;
+    top: 121.275%;
+    transform: translateX(-50%);
+}
+
+.marrace-img7{
+    position: absolute;
+    width: 27.5%;
+    min-width: 20px;
+    left: 53.75%;
+    top: 109.125%;
+    transform: translateX(-50%);
+}
+
+.marrace-img8{
+    position: absolute;
+    width: 32%;
+    min-width: 20px;
+    right: -16%;
+    top: 118%;
+    transform: translateX(-50%);
+}
+
+.marrace-text{
+    position: absolute;
+    width: 27.5%;
+    min-width: 20px;
+    font-size: clamp(16px, 1.4vw, 20px);
+    color: black;
+    left: 28%;
+    top: 27%; 
+}
+
+
+/* ===== RMuseum ===== */
+.rmuseum-container{
+    position: relative;
+    width: 100%;
+}
+
+/* сцена масштабируется только от ширины */
+.rmuseum-scene{
+    position: relative;
+    width: 100%;
+    max-width: 1920px;
+    height: calc(100vw * 0.9); 
+}
+
+
+.rmuseum-img1{
+    position: absolute;
+    width: 27.5%;
+    min-width: 20px;
+    left: 20.75%;
+    top: 15%;
+    transform: translateX(-50%);
+}
+
+.rmuseum-img2{
+    position: absolute;
+    width: 82.5%;
+    min-width: 20px;
+    right: -41.5%;
+    top: 45.5%;
+    transform: translateX(-50%);
+}
+
+.rmuseum-img3{
+    position: absolute;
+    width: 55%;
+    min-width: 20px;
+    right: -27.5%;
+    top: 76%;
+    transform: translateX(-50%);
+}
+
+.rmuseum-img4{
+    position: absolute;
+    width: 40%;
+    min-width: 20px;
+    left: 20%;
+    top: 105.4%;
+    transform: translateX(-50%);
+}
+
+.rmuseum-img5{
+    position: absolute;
+    width: 15%;
+    min-width: 20px;
+    left: 48%;
+    top: 115.675%;
+    transform: translateX(-50%);
+}
+
+.rmuseum-img6{
+    position: absolute;
+    width: 40%;
+    min-width: 20px;
+    left: 20%;
+    top: 126.5%;
+    transform: translateX(-50%);
+}
+
+.rmuseum-img7{
+    position: absolute;
+    width: 40%;
+    min-width: 20px;
+    left: 60.5%;
+    top: 126.5%;
+    transform: translateX(-50%);
+}
+
+.rmuseum-img8{
+    position: absolute;
+    width: 27.5%;
+    min-width: 20px;
+    left: 13.75%;
+    top: 144.25%;
+    transform: translateX(-50%);
+}
+
+.rmuseum-img9{
+    position: absolute;
+    width: 70%;
+    min-width: 20px;
+    right: -35%;
+    top: 158%;
+    transform: translateX(-50%);
+}
+
+.rmuseum-text{
+    position: absolute;
+    width: 45%;
+    min-width: 20px;
+    font-size: clamp(16px, 1.4vw, 20px);
+    color: black;
+    left: 7%;
+    top: 30%;
+}
+
+
+/* ===== NEWW ===== */
+.neww-container{
+    position: relative;
+    width: 100%;
+}
+
+/* сцена масштабируется только от ширины */
+.neww-scene{
+    position: relative;
+    width: 100%;
+    max-width: 1920px;
+    height: calc(100vw * 0.9); 
+}
+
+
+.neww-img1{
+    position: absolute;
+    width: 27.5%;
+    min-width: 20px;
+    left: 69%;
+    top: 15%;
+    transform: translateX(-50%);
+}
+
+.neww-img2{
+    position: absolute;
+    width: 55%;
+    min-width: 20px;
+    left: 27.5%;
+    top: 36.5%;
+    transform: translateX(-50%);
+}
+
+.neww-img3{
+    position: absolute;
+    width: 27.5%;
+    min-width: 20px;
+    right: -13.75%;
+    top: 60.45%;
+    transform: translateX(-50%);
+}
+
+.neww-img4{
+    position: absolute;
+    width: 13.75%;
+    min-width: 20px;
+    right: 6.875%;
+    top: 92%;
+    transform: translateX(-50%);
+}
+
+.neww-img5{
+    position: absolute;
+    width: 27.5%;
+    min-width: 20px;
+    right: 14%;
+    top: 112.25%;
+    transform: translateX(-50%);
+}
+
+.neww-img6{
+    position: absolute;
+    width: 27.5%;
+    min-width: 20px;
+    right: 41.75%;
+    top: 112.25%;
+    transform: translateX(-50%);
+}
+
+.neww-img7{
+    position: absolute;
+    width: 17%;
+    min-width: 20px;
+    left: 8.5%;
+    top: 150.5%;
+    transform: translateX(-50%);
+}
+
+.neww-img8{
+    position: absolute;
+    width: 42%;
+    min-width: 20px;
+    right: -21%;
+    top: 150.5%;
+    transform: translateX(-50%);
+}
+
+.neww-img9{
+    position: absolute;
+    width: 42%;
+    min-width: 20px;
+    left: 21%;
+    top: 184.25%;
+    transform: translateX(-50%);
+}
+
+.neww-text{
+    position: absolute;
+    width: 27.5%;
+    min-width: 20px;
+    font-size: clamp(16px, 1.4vw, 20px);
+    color: black;
+    left: 15%;
+    top: 19%;
+}
+
+/* ===== АНИМАЦИЯ ПЕРВОГО ОТКРЫТИЯ ===== */
+
+.left,
+.middle,
+.right {
+    transform: translateX(-20px);
+    opacity: 0;
+}
+
+.left {
+    animation: columnSlide 0.3s ease forwards;
+}
+
+.middle {
+    animation: columnSlide 0.4s ease forwards;
+    animation-delay: 0.15s;
+}
+
+.right {
+    animation: columnSlide 0.6s ease forwards;
+    animation-delay: 0.3s;
+}
+
+@keyframes columnSlide {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.rectangle { width: 100%; height: 100%; background-color: #7d5858; }
+
+</style>
+</head>
+
+<body>
+
+<div class="desktop">
+
+    <!-- ЛЕВАЯ -->
+    <div class="column left">
+
+        <a href="#" class="name hover-highlight">Белоконь Арсений</a>
+        <div class="profession">Графический дизайнер, художник</div>
+
+        <!--<a href="https://drive.google.com/" target="_blank" class="resume hover-highlight">
+            Резюме
+        </a>-->
+
+        <div class="contacts">
+            <span class="contact-label">Позвонить:</span>
+            <span class="phone" id="phone">
+                +7 904 756-66-12
+            </span>
+
+            <span class="contact-label telegram-label">
+                Написать (Telegram):
+            </span>
+            <a href="https://t.me/skudoumm" target="_blank" class="telegram hover-highlight">
+                @skudoumm
+            </a>
+        </div>
+
+    </div>
+
+
+    <!-- СРЕДНЯЯ -->
+    <div class="column middle">
+
+        <div class="project-list">
+
+            <div class="project" data-project="art-space">
+                <div class="project-meta">[Творческий проект] · 10.2025</div>
+                <div class="project-title">
+                    Брендинг для современного арт-пространства
+                </div>
+            </div>
+
+            <div class="project" data-project="ceramic-festival">
+                <div class="project-meta">[Творческий проект] · 06.2025</div>
+                <div class="project-title">
+                    Брендинг для фестиваля керамики
+                </div>
+            </div>
+
+            <div class="project" data-project="russian-museum">
+                <div class="project-meta">[Хакатон] · 05.2025</div>
+                <div class="project-title">
+                    Фирменный стиль для молодежного сообщества Русского музея
+                </div>
+            </div>
+
+            <div class="project" data-project="magazine">
+                <div class="project-meta">[Учебный проект] · 02.2025</div>
+                <div class="project-title">
+                    Номер журнала, посвященный плёнке, как&nbsp;материалу
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ПРАВАЯ -->
+    <div class="column right" id="content"></div>
+
+</div>
+
+<div class="mobile-message">
+    версия сайта для мобильных устройств находится в разработке,  
+    но вы можете посмотреть содержимое сайта с компьютера.
+    извините за неудобства!
+</div>
+
+
+<script>
+
+// ==== ШАБЛОНЫ СТРАНИЦ ====
+
+const pages = {
+
+    about: `
+<div class="content-wrapper about-container">
+
+    <div class="page-title">ОБО МНЕ</div>
+
+    <img src="images/aboutmeimg1.jpg" class="about-img1" alt="Фото 1">
+
+    <div class="about-text">
+        Привет!<br><br>
+Меня зовут Арсений. Я&nbsp;занимаюсь дизайном и&nbsp;поиском интересных визуальных решений.
+Мне нравится работать с&nbsp;разными стилями, решать необычные задачи
+и&nbsp;воплощать в&nbsp;жизнь смелые идеи.<br><br>
+Здесь можно посмотреть кейсы, над которыми я&nbsp;работал.
+Если они тебе понравились, то&nbsp;напиши,
+я&nbsp;всегда открыт к&nbsp;новым проектам.<br><br>
+Приятного просмотра!
+    </div>
+
+    <img src="images/aboutmeimg2.jpg" class="about-img2" alt="Фото 2">
+
+</div>
+`,
+
+    "art-space": `
+        <div class="content-wrapper neww-scene">
+            <div class="page-title">NEWW</div>
+            <div class="neww-text">
+                    NEWW&nbsp;&mdash; это пространство, ориентированное на&nbsp;осознанный отдых. Главными ценностями проекта являются экологичность, отраженная в&nbsp;бережном отношении к&nbsp;самому себе, и&nbsp;технологичность, воплощенная в&nbsp;современных подходах к&nbsp;работе и&nbsp;отдыху.
+                </div>
+            <video autoplay muted loop playsinline class="neww-img1">
+                <source src="images/neww1.mp4" type="video/mp4">
+            </video>
+            <img src="images/neww2.png" class="neww-img2" alt="Фото 2">
+            <img src="images/neww3.jpg" class="neww-img3" alt="Фото 3">
+            <img src="images/neww5.jpg" class="neww-img5" alt="Фото 5">
+            <img src="images/neww6.png" class="neww-img6" alt="Фото 6">
+            <img src="images/neww7.png" class="neww-img7" alt="Фото 7">
+            <img src="images/neww8.jpg" class="neww-img8" alt="Фото 8">
+            <img src="images/neww9.jpg" class="neww-img9" alt="Фото 9">
+        </div>
+    `,
+
+    "ceramic-festival": `
+        <div class="content-wrapper marrace-scene">
+            <div class="page-title">MARRACE</div>
+            <div class="marrace-text">
+                    Marrace&nbsp;&mdash; фестиваль керамических изделий. При разработке его визуальной айдентики я&nbsp;вдохновлялся эстетикой ручного труда: несовершенными, но&nbsp;живыми формами.
+                </div>
+            <img src="images/marrace1.png" class="marrace-img1" alt="Фото 1">
+            <img src="images/marrace2.png" class="marrace-img2" alt="Фото 2">
+            <img src="images/marrace3.png" class="marrace-img3" alt="Фото 3">
+            <img src="images/marrace4.png" class="marrace-img4" alt="Фото 4">
+            <img src="images/marrace5.png" class="marrace-img5" alt="Фото 5">
+            <img src="images/marrace6.png" class="marrace-img6" alt="Фото 6">
+            <img src="images/marrace7.png" class="marrace-img7" alt="Фото 7">
+            <img src="images/marrace8.png" class="marrace-img8" alt="Фото 8">
+        </div>
+    `,
+
+    "russian-museum": `
+        <div class="content-wrapper rmuseum-scene">
+            <div class="page-title">ХАКАТОН</div>
+             <div class="rmuseum-text">
+                Фирменный стиль для Молодёжного сообщества Русского&nbsp;музея был разработан нашей командой в&nbsp;рамках двухдневного хакатона. Ключевой метафорой брендинга стала фраза &laquo;Огонь в&nbsp;глазах&raquo;, передающая характер и&nbsp;атмосферу сообщества. По&nbsp;итогам конкурса проект занял третье место.
+        </div>
+            <img src="images/rmuseum1.png" class="rmuseum-img1" alt="Фото 1">
+            <img src="images/rmuseum2.png" class="rmuseum-img2" alt="Фото 2">
+            <img src="images/rmuseum3.jpg" class="rmuseum-img3" alt="Фото 3">
+            <img src="images/rmuseum4.png" class="rmuseum-img4" alt="Фото 4">
+            <img src="images/rmuseum5.png" class="rmuseum-img5" alt="Фото 5">
+            <img src="images/rmuseum6.png" class="rmuseum-img6" alt="Фото 6">
+            <img src="images/rmuseum7.png" class="rmuseum-img7" alt="Фото 7">
+            <img src="images/rmuseum8.png" class="rmuseum-img8" alt="Фото 8">
+            <img src="images/rmuseum9.jpg" class="rmuseum-img9" alt="Фото 9">
+        </div>
+    `,
+
+    "magazine": `
+        <div class="content-wrapper materia-scene">
+            <div class="page-title">МАТЕРИЯ</div>
+            <img src="images/materia1.jpg" class="materia-img1" alt="Фото 1">
+            <div class="materia-text">
+        Материя&nbsp;&mdash; исследовательский журнал о&nbsp;материалах, в&nbsp;котором привычные вещи рассматриваются, как объекты визуальной культуры. Этот выпуск посвящен пленке&nbsp;&mdash; утилитарному материалу, который мы&nbsp;почти не&nbsp;замечаем в&nbsp;повседневной жизни.
+    </div>
+            <img src="images/materia2.png" class="materia-img2" alt="Фото 2">
+            <img src="images/materia3.jpg" class="materia-img3" alt="Фото 3">
+            <img src="images/materia4.png" class="materia-img4" alt="Фото 4">
+        </div>
+    `
+};
+
+
+// ==== ФУНКЦИЯ ЗАГРУЗКИ СТРАНИЦЫ ====
+
+function loadPage(pageKey) {
+    const content = document.getElementById("content");
+    content.innerHTML = pages[pageKey];
+    content.scrollTop = 0;
+}
+
+
+// ==== КЛИК ПО ИМЕНИ (ОБО МНЕ) ====
+
+document.querySelector(".name").addEventListener("click", function(e){
+    e.preventDefault();
+    loadPage("about");
+});
+
+
+// ==== КЛИК ПО ПРОЕКТАМ ====
+
+document.querySelectorAll(".project").forEach(project => {
+    project.addEventListener("click", function() {
+        const key = this.getAttribute("data-project");
+        loadPage(key);
+    });
+});
+
+
+// ==== ЗАГРУЗКА ПО УМОЛЧАНИЮ ====
+
+loadPage("about");
+
+</script>
+</script>
+
+</body>
+</html>
