@@ -57,6 +57,28 @@ body {
 
 /* ===== ЛЕВАЯ КОЛОНКА ===== */
 
+.language-switch {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.language-switch a {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.language-switch .language-current {
+    color: #A0A0A0;
+    cursor: default;
+    font-size: 12px;
+}
+
 .name {
     font-size: 16px;
     cursor: pointer;
@@ -695,6 +717,12 @@ body {
 
     <!-- ЛЕВАЯ -->
     <div class="column left">
+
+        <nav class="language-switch" aria-label="Выбор языка">
+            <span class="language-current" aria-current="page">RU</span>
+            <span aria-hidden="true">/</span>
+            <a href="en.html" class="hover-highlight" lang="en">EN</a>
+        </nav>
 
         <a href="#" class="name hover-highlight">Белоконь Арсений</a>
         <div class="profession">Графический дизайнер, художник</div>
